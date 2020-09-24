@@ -20,34 +20,69 @@ def readFile(path):
         return "Não Foi possivel carregar o arquivo"
 
 
-def dados_cnae(cnae):
-    
-    url = "http://www.fieb.org.br/guia/Resultado_Consulta.aspx?operProduto=and&localizacao=&ordenacao=ind_razao_social&page=9&consulta=Consultas+Especiais&consulta=Consultas+Especiais"
+def dados_cnae(cnae, cont):
+
     #url = "http://www.fieb.org.br/guia/Resultado_Consulta?CodCnae=C&NomeAtividade=IND%c3%9aSTRIAS%20DE%20TRANSFORMA%c3%87%c3%83O.&operProduto=and&localizacao=&ordenacao=ind_razao_social&page=0&consulta=Consultas%20Especiais"
-    p = {
+
+    p = urllib.parse.urlencode({
         'CodCnae': cnae[0],
-       'NomeAtividade': cnae[1]
-    }
-    #print(urllib.parse.urlencode(p))
-    pagina = requests.get(url,params=p)
+        'NomeAtividade': cnae[1],
+        'operProduto': 'and',
+        'localizacao': '',
+        'ordenacao': 'ind_razao_social',
+        'page': 0,
+        'consulta': 'Consultas Especiais'
+
+    })
+    p.encode('ascii')
+    url = "http://www.fieb.org.br/guia/Resultado_Consulta.aspx?%s" % p
+    urlemp  = []
+    csv     = []
+    pagina = requests.get(url)
     html = BeautifulSoup(pagina.text, 'lxml')
-    print(html)
     # PEGAR QUANTIDADE DE PAGINAS NO RESULTADO DA CONSULTA
-    r = html.find(id="label-consulta-8")
-    empresas = parser_html(html)
-    if empresas:
-        export_csv(empresas, True)
+    paginacao = html.find(id="label-consulta-8")
+    total_emp = html.find_all(id="label-consulta-3")
+    for alink in total_emp:
+        urlemp.append(alink.a.get('href'))
+        
+    for lnk in urlemp:
+        url = "http://www.fieb.org.br/guia/" + lnk
+        pagina = requests.get(url)
+        html = BeautifulSoup(pagina.content, 'lxml')       
+        dados_emp = list(html.find(id="divDadosIndustria"))
+        
+        if len(dados_emp) == 99:
+            print('Gerando Dados CSV 1')
+            csv.append(parse_csv(dados_emp))
 
-    if len(r.find_all('a')) > 0:
-        print('Request OUtras Paginas')
-        for link in r.find_all('a'):
+    if len(paginacao.find_all('a')) > 0:
+      
+        urlemp.clear()
+        for link in paginacao.find_all('a'):
+            #EXECUTA PAGINAÇÃO
+            
             url = "http://www.fieb.org.br/guia/" + link.get('href')
+            
             pagina = requests.get(url)
-            html = BeautifulSoup(pagina.text, 'lxml')
-            empresas = parser_html(html)
-            if empresas:
-                export_csv(empresas, False)
-
+            html = BeautifulSoup(pagina.content, 'lxml')
+            total_emp = html.find_all(id="label-consulta-3")
+            for alink in total_emp:
+                urlemp.append(alink.a.get('href'))
+                
+            for lnk in urlemp:
+                url = "http://www.fieb.org.br/guia/" + lnk
+                pagina = requests.get(url)
+                html = BeautifulSoup(pagina.content, 'lxml')       
+                dados_emp = list(html.find(id="divDadosIndustria"))
+                
+                if len(dados_emp) == 99:
+                    print('Gerando Dados CSV 1')
+                    csv.append(parse_csv(dados_emp))
+            #PEGA OS LINKS DAS EMPRESAS DA PAGINA
+        
+    export_csv(csv)
+    exit()
 
 def parser_html(html):
     empresas = {
@@ -68,7 +103,7 @@ def parser_html(html):
     body = html.find(id="ContentPlaceHolder1_generalContent_divResultado")
     if body == None:
         return False
-    
+
     tb_resultado = body.findAll('table')[0]
     # RAZÃO SOCIAL DAS EMPRESAS
     for rz in tb_resultado.find_all(id="label-consulta-3"):
@@ -97,7 +132,7 @@ def parser_html(html):
     return empresas
 
 
-def export_csv(data_empresa, novo):
+def export_csv(dados_emp):
     try:
         h = 'Nome da Empresa;Origem;Sub-Origem;Mercado;Produto;Site;País;Estado;Cidade;Logradouro;Numero;Bairro;Complemento;CEP;Telefone;Telefone 2;Observação;Nome Contato;E-mail Contato;Cargo Contato;Tel. Contato;Tel. 2 Contato;LinkedIn Contato;Tipo do Serv. Comunicação;ID do Serv. Comunicação;CpfCnpj;Duplicado'
         x = datetime.datetime.now()
@@ -134,3 +169,46 @@ def export_csv(data_empresa, novo):
         print("Não Foi possivel carregar o arquivo", e)
         exit()
     print('Arquivo gerado com sucesso :'+file)
+
+
+def parse_csv(dados_emp):
+    
+    empresas = {
+        'NomeEmpresa': [],
+        'Telefone': [],
+        'Mercado': [],
+        'Municipio': [],
+        'Produtos': [],
+        'Site':[],
+        'Pais':[],
+        'Estado':[],
+        'Cidade':[],
+        'Logradouro':[],
+        'Numero':[],
+        'Bairro':[],
+        'Complemento':[],
+        'CEP':[],
+        'Telefone2':[],
+        'CpfCnpj':[]
+
+    }
+    if(dados_emp):
+        #exit()
+        empresas['NomeEmpresa'].append(dados_emp[1].text)
+        empresas['Telefone'].append(dados_emp[87].text)
+        empresas['Mercado'].append(dados_emp[28].text)
+        empresas['Produtos'].append(dados_emp[32].text)
+        empresas['Site'].append(dados_emp[97].text)
+        empresas['Pais'].append('Brasil')
+        empresas['Estado'].append('BA')
+        empresas['Cidade'].append(dados_emp[72].text)
+        empresas['Logradouro'].append(dados_emp[57].text) 
+        empresas['Numero'].append( 'S/N')
+        empresas['Bairro'].append(dados_emp[67].text)
+        empresas['CEP'].append(dados_emp[82].text)
+        empresas['Telefone2'].append(dados_emp[87].text)
+        empresas['CpfCnpj'].append(dados_emp[4])
+        return empresas
+    else:
+        return False     
+    
