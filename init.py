@@ -2,11 +2,11 @@
 import src.funcoes as f
     
 meus_cnae = f.readFile('input\cnae.txt')
-cont = 0
+print( 'QUANTIDADE DE CNAES LIDOS ',len(meus_cnae))
 for cnae in meus_cnae:
-    f.dados_cnae(cnae.split("-"),cont)
-    cont =+ 1
-    exit()
+    f.dados_cnae(cnae.split("-"))
+   
+  
     #ENvia PARA FUNÇÃO REALIZAR SCRAP
     
     
