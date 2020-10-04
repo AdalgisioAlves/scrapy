@@ -1,0 +1,280 @@
+
+def parse_csv(dados_emp):
+
+    empresas = {
+        'NomeEmpresa': '',
+        'Telefone': '',
+        'Mercado': '',
+        'Produtos': '',
+        'Site': '',
+        'Pais': '',
+        'Estado': '',
+        'Cidade':'',
+        'Logradouro': '',
+        'Numero':'',
+        'Bairro': '',
+        'Complemento':'',
+        'CEP': '',
+        'Telefone2': '',
+        'Email': '',
+        'CpfCnpj': ''
+
+    }
+    if len(dados_emp) == 57:
+        empresas['NomeEmpresa'] = str(dados_emp[0].text)
+        empresas['Telefone'] = str(dados_emp[52].text)
+        empresas['Mercado'] = str('')
+        empresas['Produtos'] = str(dados_emp[16].text)
+        empresas['Site'] = str(dados_emp[56].text)
+        empresas['Pais'] = str('Brasil')
+        empresas['Estado'] = str('BA')
+        empresas['Cidade'] = str(dados_emp[46].text)
+        empresas['Logradouro'] = str(dados_emp[40].text)
+        empresas['Numero'] = str('S/N')
+        empresas['Bairro'] = str(dados_emp[42].text)
+        empresas['CEP'] = str(dados_emp[50].text)
+        empresas['Telefone2'] = str('')
+        empresas['CpfCnpj'] = str(dados_emp[2])
+        empresas['Email'] = str(dados_emp[54].text)
+    if len(dados_emp) == 56:
+            empresas['NomeEmpresa'] = str(dados_emp[0].text)
+            empresas['Telefone'] = str(dados_emp[51].text)
+            empresas['Mercado'] = str('')
+            empresas['Produtos'] = str(dados_emp[15].text)
+            empresas['Site'] = str(dados_emp[55].text)
+            empresas['Pais'] = str('Brasil')
+            empresas['Estado'] = str('BA')
+            empresas['Cidade'] = str(dados_emp[45].text)
+            empresas['Logradouro'] = str(dados_emp[39].text)
+            empresas['Numero'] = str('S/N')
+            empresas['Bairro'] = str(dados_emp[43].text)
+            empresas['CEP'] = str(dados_emp[49].text)
+            empresas['Telefone2'] = str('')
+            empresas['CpfCnpj'] = str(dados_emp[2])
+            empresas['Email'] = str(dados_emp[53].text)
+            return empresas
+    if len(dados_emp) == 53:
+        empresas['NomeEmpresa'] = str(dados_emp[0].text)
+        empresas['Telefone'] = str(dados_emp[43].text)
+        empresas['Mercado'] = str('')
+        empresas['Produtos'] = str(dados_emp[21].text)
+        empresas['Site'] = str(dados_emp[48].text)
+        empresas['Pais'] = str('Brasil')
+        empresas['Estado'] = str('BA')
+        empresas['Cidade'] = str(dados_emp[38].text)
+        empresas['Logradouro'] = str(dados_emp[29].text)
+        empresas['Numero'] = str('S/N')
+        empresas['Bairro'] = str(dados_emp[33].text)
+        empresas['CEP'] = str(dados_emp[33].text)
+        empresas['Telefone2'] = str('')
+        empresas['CpfCnpj'] = str(dados_emp[2])
+        empresas['Email'] = str(dados_emp[43].text)
+        return empresas
+    if len(dados_emp) == 51:
+        empresas['NomeEmpresa'] = str(dados_emp[0].text)
+        empresas['Telefone'] = str(dados_emp[44].text)
+        empresas['Mercado'] = str('')
+        empresas['Produtos'] = str(dados_emp[15].text)
+        empresas['Site'] = str(dados_emp[50].text)
+        empresas['Pais'] = str('Brasil')
+        empresas['Estado'] = str('BA')
+        empresas['Cidade'] = str(dados_emp[40].text)
+        empresas['Logradouro'] = str(dados_emp[34].text)
+        empresas['Numero'] = str('S/N')
+        empresas['Bairro'] = str(dados_emp[38].text)
+        empresas['CEP'] = str(dados_emp[44].text)
+        empresas['Telefone2'] = str('')
+        empresas['CpfCnpj'] = str(dados_emp[2])
+        empresas['Email'] = str(dados_emp[48].text)
+        return empresas
+    if len(dados_emp) == 50:
+        empresas['NomeEmpresa'] = str(dados_emp[0].text)
+        empresas['Telefone'] = str(dados_emp[45].text)
+        empresas['Mercado'] = str('')
+        empresas['Produtos'] = str(dados_emp[15].text)
+        empresas['Site'] = str(dados_emp[49].text)
+        empresas['Pais'] = str('Brasil')
+        empresas['Estado'] = str('BA')
+        empresas['Cidade'] = str(dados_emp[39].text)
+        empresas['Logradouro'] = str(dados_emp[33].text)
+        empresas['Numero'] = str('S/N')
+        empresas['Bairro'] = str(dados_emp[37].text)
+        empresas['CEP'] = str(dados_emp[43].text)
+        empresas['Telefone2'] = str('')
+        empresas['CpfCnpj'] = str(dados_emp[2])
+        empresas['Email'] = str(dados_emp[47].text)
+        return empresas
+    if len(dados_emp) == 49:
+        empresas['NomeEmpresa'] = str(dados_emp[0].text)
+        empresas['Telefone'] = str(dados_emp[45].text)
+        empresas['Mercado'] = str('')
+        empresas['Produtos'] = str(dados_emp[15].text +" "+dados_emp[16].text)
+        empresas['Site'] = str(dados_emp[47].text)
+        empresas['Pais'] = str('Brasil')
+        empresas['Estado'] = str('BA')
+        empresas['Cidade'] = str(dados_emp[37].text)
+        empresas['Logradouro'] = str(dados_emp[31].text)
+        empresas['Numero'] = str('S/N')
+        empresas['Bairro'] = str(dados_emp[35].text)
+        empresas['CEP'] = str(dados_emp[41].text)
+        empresas['Telefone2'] = str('')
+        empresas['CpfCnpj'] = str(dados_emp[2])
+        empresas['Email'] = str(dados_emp[45].text)
+        return empresas
+    if len(dados_emp) == 48:
+        empresas['NomeEmpresa'] = str(dados_emp[0].text)
+        empresas['Telefone'] = str(dados_emp[43].text)
+        empresas['Mercado'] = str('')
+        empresas['Produtos'] = str(dados_emp[15].text)
+        empresas['Site'] = str(dados_emp[47].text)
+        empresas['Pais'] = str('Brasil')
+        empresas['Estado'] = str('BA')
+        empresas['Cidade'] = str(dados_emp[37].text)
+        empresas['Logradouro'] = str(dados_emp[31].text)
+        empresas['Numero'] = str('S/N')
+        empresas['Bairro'] = str(dados_emp[35].text)
+        empresas['CEP'] = str(dados_emp[41].text)
+        empresas['Telefone2'] = str('')
+        empresas['CpfCnpj'] = str(dados_emp[2])
+        empresas['Email'] = str(dados_emp[45].text)
+        return empresas
+    if len(dados_emp) == 47:
+        empresas['NomeEmpresa'] = str(dados_emp[0].text)
+        empresas['Telefone'] = str(dados_emp[42].text)
+        empresas['Mercado'] = str('')
+        empresas['Produtos'] = str(dados_emp[15].text)
+        empresas['Site'] = str(dados_emp[46].text)
+        empresas['Pais'] = str('Brasil')
+        empresas['Estado'] = str('BA')
+        empresas['Cidade'] = str(dados_emp[36].text)
+        empresas['Logradouro'] = str(dados_emp[30].text)
+        empresas['Numero'] = str('S/N')
+        empresas['Bairro'] = str(dados_emp[34].text)
+        empresas['CEP'] = str(dados_emp[40].text)
+        empresas['Telefone2'] = str('')
+        empresas['CpfCnpj'] = str(dados_emp[2])
+        empresas['Email'] = str(dados_emp[44].text)
+        return empresas
+    if len(dados_emp) == 46:
+        empresas['NomeEmpresa'] = str(dados_emp[0].text)
+        empresas['Telefone'] = str(dados_emp[41].text)
+        empresas['Mercado'] = str('')
+        empresas['Produtos'] = str(dados_emp[18].text)
+        empresas['Site'] = str(dados_emp[45].text)
+        empresas['Pais'] = str('Brasil')
+        empresas['Estado'] = str('BA')
+        empresas['Cidade'] = str(dados_emp[35].text)
+        empresas['Logradouro'] = str(dados_emp[29].text)
+        empresas['Numero'] = str('S/N')
+        empresas['Bairro'] = str(dados_emp[33].text)
+        empresas['CEP'] = str(dados_emp[39].text)
+        empresas['Telefone2'] = str('')
+        empresas['CpfCnpj'] = str(dados_emp[2])
+        empresas['Email'] = str(dados_emp[43].text)
+        return empresas
+    if len(dados_emp) == 45:
+        empresas['NomeEmpresa'] = str(dados_emp[0].text)
+        empresas['Telefone'] = str(dados_emp[40].text)
+        empresas['Mercado'] = str('')
+        empresas['Produtos'] = str(dados_emp[17].text)
+        empresas['Site'] = str(dados_emp[44].text)
+        empresas['Pais'] = str('Brasil')
+        empresas['Estado'] = str('BA')
+        empresas['Cidade'] = str(dados_emp[34].text)
+        empresas['Logradouro'] = str(dados_emp[28].text)
+        empresas['Numero'] = str('S/N')
+        empresas['Bairro'] = str(dados_emp[32].text)
+        empresas['CEP'] = str(dados_emp[38].text)
+        empresas['Telefone2'] = str('')
+        empresas['CpfCnpj'] = str(dados_emp[2])
+        empresas['Email'] = str(dados_emp[42].text)
+        return empresas
+    if len(dados_emp) == 44:
+        empresas['NomeEmpresa'] = str(dados_emp[0].text)
+        empresas['Telefone'] = str(dados_emp[39].text)
+        empresas['Mercado'] = str('')
+        empresas['Produtos'] = str(dados_emp[16].text)
+        empresas['Site'] = str(dados_emp[43].text)
+        empresas['Pais'] = str('Brasil')
+        empresas['Estado'] = str('BA')
+        empresas['Cidade'] = str(dados_emp[33].text)
+        empresas['Logradouro'] = str(dados_emp[27].text)
+        empresas['Numero'] = str('S/N')
+        empresas['Bairro'] = str(dados_emp[31].text)
+        empresas['CEP'] = str(dados_emp[37].text)
+        empresas['Telefone2'] = str('')
+        empresas['CpfCnpj'] = str(dados_emp[2])
+        empresas['Email'] = str(dados_emp[41].text)
+        return empresas
+
+    if len(dados_emp) == 43:       
+        empresas['NomeEmpresa'] = str(dados_emp[0].text)
+        empresas['Telefone'] = str(dados_emp[38].text)
+        empresas['Mercado'] = str('')
+        empresas['Produtos'] = str(dados_emp[15].text)
+        empresas['Site'] = str(dados_emp[42].text)
+        empresas['Pais'] = str('Brasil')
+        empresas['Estado'] = str('BA')
+        empresas['Cidade'] = str(dados_emp[32].text)
+        empresas['Logradouro'] = str(dados_emp[26].text)
+        empresas['Numero'] = str('S/N')
+        empresas['Bairro'] = str(dados_emp[30].text)
+        empresas['CEP'] = str(dados_emp[36].text)
+        empresas['Telefone2'] = str('')
+        empresas['CpfCnpj'] = str(dados_emp[2])
+        empresas['Email'] = str(dados_emp[40].text)
+        return empresas
+    
+    if len(dados_emp) == 42:           
+        empresas['NomeEmpresa'] = str(dados_emp[0].text)
+        empresas['Telefone'] = str(dados_emp[37].text)
+        empresas['Mercado'] = str('')
+        empresas['Produtos'] = str(dados_emp[15].text)
+        empresas['Site'] = str(dados_emp[41].text)
+        empresas['Pais'] = str('Brasil')
+        empresas['Estado'] = str('BA')
+        empresas['Cidade'] = str(dados_emp[31].text)
+        empresas['Logradouro'] = str(dados_emp[25].text)
+        empresas['Numero'] = str('S/N')
+        empresas['Bairro'] = str(dados_emp[29].text)
+        empresas['CEP'] = str(dados_emp[35].text)
+        empresas['Telefone2'] = str('')
+        empresas['CpfCnpj'] = str(dados_emp[2])
+        empresas['Email'] = str(dados_emp[39].text)
+        return empresas
+    if len(dados_emp) == 41:           
+        empresas['NomeEmpresa'] = str(dados_emp[0].text)
+        empresas['Telefone'] = str(dados_emp[36].text)
+        empresas['Mercado'] = str('')
+        empresas['Produtos'] = str(dados_emp[15].text)
+        empresas['Site'] = str(dados_emp[40].text)
+        empresas['Pais'] = str('Brasil')
+        empresas['Estado'] = str('BA')
+        empresas['Cidade'] = str(dados_emp[30].text)
+        empresas['Logradouro'] = str(dados_emp[24].text)
+        empresas['Numero'] = str('S/N')
+        empresas['Bairro'] = str(dados_emp[28].text)
+        empresas['CEP'] = str(dados_emp[34].text)
+        empresas['Telefone2'] = str('')
+        empresas['CpfCnpj'] = str(dados_emp[2])
+        empresas['Email'] = str(dados_emp[38].text)
+        return empresas
+    if len(dados_emp) == 40:           
+        empresas['NomeEmpresa'] = str(dados_emp[0].text)
+        empresas['Telefone'] = str(dados_emp[35].text)
+        empresas['Mercado'] = str('')
+        empresas['Produtos'] = str(dados_emp[14].text)
+        empresas['Site'] = str(dados_emp[39].text)
+        empresas['Pais'] = str('Brasil')
+        empresas['Estado'] = str('BA')
+        empresas['Cidade'] = str(dados_emp[29].text)
+        empresas['Logradouro'] = str(dados_emp[23].text)
+        empresas['Numero'] = str('S/N')
+        empresas['Bairro'] = str(dados_emp[27].text)
+        empresas['CEP'] = str(dados_emp[33].text)
+        empresas['Telefone2'] = str('')
+        empresas['CpfCnpj'] = str(dados_emp[2])
+        empresas['Email'] = str(dados_emp[37].text)
+        return empresas
+    
+    return False

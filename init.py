@@ -5,7 +5,6 @@ meus_cnae = f.readFile('input\cnae.txt')
 print( 'QUANTIDADE DE CNAES LIDOS ',len(meus_cnae))
 for cnae in meus_cnae:
     f.dados_cnae(cnae.split("-"))
-   
   
     #ENvia PARA FUNÇÃO REALIZAR SCRAP
     
