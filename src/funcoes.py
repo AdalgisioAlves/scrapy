@@ -23,9 +23,8 @@ def readFile(path):
 def dados_cnae(cnae):
 
     # url = "http://www.fieb.org.br/guia/Resultado_Consulta?CodCnae=C&NomeAtividade=IND%c3%9aSTRIAS%20DE%20TRANSFORMA%c3%87%c3%83O.&operProduto=and&localizacao=&ordenacao=ind_razao_social&page=0&consulta=Consultas%20Especiais"
-
     p = urllib.parse.urlencode({
-        'CodCnae': cnae,
+        'CodCnae': cnae[0],
         'NomeAtividade': cnae[1],
         'operProduto': 'and',
         'localizacao': '',
@@ -125,16 +124,16 @@ def export_csv(data_empresa,cnae):
                 if e != None and e != False:
                     telefone = e['Telefone'].split('/')
                     if len(telefone )> 2:
-                         t1 = telefone[0]
+                         t1 = telefone[0]                         
                          t2 = telefone[1]
                          t3 = telefone[2]
                     else: 
-                        t1 = telefone
+                        t1 = telefone[0]
                         t2 = ""
                         t3 = ""                    
-                    linha = e['NomeEmpresa'] + ';;;' +str(cnae[1]).rstrip('\n') +';' +e['Mercado'] + e['Produtos'].replace(';', ' ') + ';' + e['Site'] + ';BRASIL;BAHIA;' + e['Cidade'] + ';' + \
+                    linha = e['NomeEmpresa'] + ';;;' +cnae[1].rstrip('\n') +';' +e['Mercado'] + e['Produtos'].replace(';', ' ') + ';' + e['Site'] + ';BRASIL;BAHIA;' + e['Cidade'] + ';' + \
                     e['Logradouro'] + ';S/N;' + e['Bairro'] + ';;' + e['CEP'] + ';' + t1 +';'+t2+';; ;' + \
-                    e['Email'] + '; ;'+ t3 +';;;;;"'+ str(e['CpfCnpj']) +'";'
+                    e['Email'] + '; ;'+ t3 +';;;;;'+ str(e['CpfCnpj']) +';'
                     f.write(linha+'\n')
                     l += 1
         f.close()
