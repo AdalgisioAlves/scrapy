@@ -37,6 +37,7 @@ def dados_cnae(cnae):
     url = "http://www.fieb.org.br/guia/Resultado_Consulta.aspx?%s" % p
     urlemp = []
     csv = []
+    i = 1 
     pagina = requests.get(url)
     html = BeautifulSoup(pagina.content, 'lxml')   
     
@@ -57,9 +58,9 @@ def dados_cnae(cnae):
         
     if  int(NUM_PAGINA)  > 1:
         urlemp.clear()
-        i = 1 
+        
         while int(NUM_PAGINA) > i:       # EXECUTA PAGINAÇÃO
-            print('INTERAÇÃO HTML %',i)
+            
             p = urllib.parse.urlencode({
                 'CodCnae': cnae,
                 'NomeAtividade': cnae[1],
@@ -96,7 +97,7 @@ def dados_cnae(cnae):
             urlemp.clear()
             i += 1        
          # PEGA OS LINKS DAS EMPRESAS DA PAGINA
-    
+    print('DADOS COLETADOS =',i)
     export_csv(csv,cnae)
     csv.clear()
   
